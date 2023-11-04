@@ -14,3 +14,23 @@ pub fn run(root: &Option<Rc<RefCell<TreeNode<i32>>>>) -> Vec<i32> {
     helper(root, &mut result);
     return result;
 }
+
+pub fn run_no_rec(root: Option<Rc<RefCell<TreeNode<i32>>>>) -> Vec<i32> {
+    let mut result = Vec::new();
+    let mut stack = VecDeque::new();
+    if let Some(node) = root {
+        stack.push_back(node);
+    }
+    while !stack.is_empty() {
+        let node = stack.pop_back().unwrap();
+        result.push(node.borrow().val);
+        if node.borrow().right.is_some() {
+            stack.push_back(node.borrow().right.clone().unwrap());
+        }
+        if node.borrow().left.is_some() {
+            stack.push_back(node.borrow().left.clone().unwrap());
+        }
+    }
+
+    result
+}

@@ -77,3 +77,38 @@ fn pre_order() {
     let res = pre_order::run(&Some(Rc::new(RefCell::new(tree))));
     assert_eq!(res, vec![1,2,4,5,3,6,7]);
 }
+
+#[test]
+fn pre_order_no_rec() {
+    let tree = TreeNode{
+        val: 1,
+        left: Some(Rc::new(RefCell::new(TreeNode{
+            val: 2,
+            left: Some(Rc::new(RefCell::new(TreeNode{
+                val: 4,
+                left: None,
+                right: None,
+            }))),
+            right: Some(Rc::new(RefCell::new(TreeNode{
+                val: 5,
+                left: None,
+                right: None,
+            }))),
+        }))),
+        right: Some(Rc::new(RefCell::new(TreeNode{
+            val: 3,
+            left: Some(Rc::new(RefCell::new(TreeNode{
+                val: 6,
+                left: None,
+                right: None,
+            }))),
+            right: Some(Rc::new(RefCell::new(TreeNode{
+                val: 7,
+                left: None,
+                right: None,
+            }))),
+        }))),
+    };
+    let res = pre_order::run_no_rec(Some(Rc::new(RefCell::new(tree))));
+    assert_eq!(res, vec![1,2,4,5,3,6,7]);
+}
