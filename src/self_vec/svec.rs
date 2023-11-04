@@ -75,7 +75,7 @@ impl<T> SVec<T> {
                 self.len - index
             );
             ptr::write(self.ptr.as_ptr().add(index), elem);
-            self.len -= 1;
+            self.len += 1;
         }
     }
 
