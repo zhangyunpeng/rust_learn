@@ -9,3 +9,4 @@ proc-macro = false
 
 [dependencies]
 learn_macro = {path="./learn_macro"}
+rand="0.8.5"
